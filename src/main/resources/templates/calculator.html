@@ -19,45 +19,56 @@
 	            </td>
 	        </tr>
 	        
-	        <tr class="cal">
-	            <td colspan="3">AC</td>
-	            <td>/</td>
+	        <tr>
+	            <td colspan="3" onclick="reset()">AC</td>
+	            <td onclick="add('/')">/</td>
 	        </tr>
-	        <tr class="cal">
-	            <td>7</td>
-	            <td>8</td>
-	            <td>9</td>
-	            <td>*</td>
+	        <tr>
+	            <td onclick="add(7)">7</td>
+	            <td onclick="add(8)">8</td>
+	            <td onclick="add(9)">9</td>
+	            <td onclick="add('*')">*</td>
 	        </tr>
-	        <tr class="cal">
-	            <td>4</td>
-	            <td>5</td>
-	            <td>6</td>
-	            <td>-</td>
+	        <tr>
+	            <td onclick="add(4)">4</td>
+	            <td onclick="add(5)">5</td>
+	            <td onclick="add(6)">6</td>
+	            <td onclick="add('-')">-</td>
 	        </tr>
-	        <tr class="cal">
-	            <td>1</td>
-	            <td>2</td>
-	            <td>3</td>
-	            <td>+</td>
+	        <tr>
+	            <td onclick="add(1)">1</td>
+	            <td onclick="add(2)">2</td>
+	            <td onclick="add(3)">3</td>
+	            <td onclick="add('+')">+</td>
 	        </tr>
-	        <tr class="cal">
-	            <td colspan="2">0</td>
-	            <td>.</td>
-	            <td>=</td>
+	        <tr>
+	            <td colspan="2" onclick="add(0)">0</td>
+	            <td onclick="add('.')">.</td>
+	            <td onclick="calculater()" onkeyup="enterkey()">=</td>
 	        </tr>
 	    </table>
 	</form>
 </body>
 <script>
-	const cal = document.querySelectorAll('.cal > td')
-	function click(e){
-		const display = document.getElementById('display');
-		display.value += e.target.innerText;
+	const display = document.getElementById('display');
+	function add(char){
+		display.value = display.value+char;
 	}
-	cal.forEach(function(v){
-	    v.addEventListener('click', click)
-	});
+	function calculater(){
+		const result = eval(display.value);
+		document.getElementById('result').value = result;
+	}
+	function enterkey(){
+		if (window.event.keyCode == 13) {
+	    	// 엔터키가 눌렸을 때
+			const result = eval(display.value);
+			document.getElementById('result').value = result;
+	    }
+	}
+	function reset(){
+		document.getElementById('display').value = "";
+		document.getElementById('result').value = "";
+	}
 	
 </script>
 </html>
